@@ -42,11 +42,6 @@ class User(db.Model):
     def crypt_password(password):
         return sha256_crypt.hash(str(password))
 
-    def get_fields_and_properties(model, instance):
-        field_names = [f.name for f in model._meta.fields]
-        property_names = [name for name in dir(model) if isinstance(getattr(model, name), property)]
-        return dict((name, getattr(instance, name)) for name in field_names + property_names)
-
     def to_dict(self):
         return {
             'id': self.id,
